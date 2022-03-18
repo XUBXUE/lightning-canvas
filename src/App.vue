@@ -23,22 +23,22 @@ function init() {
   ctx.value!.strokeStyle = 'rgba(100, 100, 100, 0.5)';
   ctx.value!.lineWidth = .1;
   step({
-    start: { x: width.value / 2, y: height.value },
+    start: { x: randomStartPoisition(width.value), y: height.value },
     length: 4,
     angle: -Math.PI / 2
   });
   step({
-    start: { x: width.value / 2, y: 0 },
+    start: { x: randomStartPoisition(width.value), y: 0 },
     length: 4,
     angle: Math.PI / 2
   });
   step({
-    start: { x: 0, y: height.value / 2 },
+    start: { x: 0, y: randomStartPoisition(height.value) },
     length: 4,
     angle: 0
   });
   step({
-    start: { x: width.value, y: height.value / 2 },
+    start: { x: width.value, y: randomStartPoisition(height.value) },
     length: 4,
     angle: Math.PI
   });
@@ -99,6 +99,10 @@ function lintTo(startPoint: Point, endPoint: Point) {
   ctx.value!.moveTo(startPoint.x, startPoint.y);
   ctx.value!.lineTo(endPoint.x, endPoint.y);
   ctx.value!.stroke();
+}
+
+function randomStartPoisition(length: number, startRange = 3, endRange = 8, count = 10) {
+  return length / count * (Math.random() * (endRange - startRange) + startRange);
 }
 
 startFrame();
